@@ -1,0 +1,25 @@
+[workspace]
+authors = ["Claire Jensen <clairej735@gmail.com>"]
+channels = ["conda-forge"]
+name = "negis-seasonality"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+numpy = ">=2.5.2,<3"
+matplotlib = ">=3.11.1,<4"
+pandas = ">=3.0.5,<4"
+geopandas = ">=1.1.4,<2"
+rioxarray = ">=0.23.0,<0.24"
+shapely = ">=2.1.2,<3"
+icepyx = ">=0.3.4,<0.4"
+xarray = ">=2026.7.0,<2027"
+ipython = ">=9.16.1,<10"
+jupyter = ">=1.1.1,<2"
+netcdf4 = ">=1.7.4,<2"
+s3fs = ">=2026.6.0,<2027"
+fsspec = ">=2026.6.0,<2027"
+h5netcdf = ">=1.8.1,<2"
+zarr = ">=3.3.0,<4"
