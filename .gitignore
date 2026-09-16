@@ -1,4 +1,6 @@
 # pixi environments
+.order_restart
+pixi.lock
 .pixi/*
 !.pixi/config.toml
 *.zarr
