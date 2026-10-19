@@ -1,35 +1,40 @@
 [workspace]
-authors = ["Claire Jensen <clairej735@gmail.com>"]
-channels = ["conda-forge"]
+channels = ["rapidsai", "nvidia", "conda-forge"]
 name = "negis-seasonality"
-platforms = ["osx-arm64"]
+platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
 
 [dependencies]
-numpy = ">=2.5.2,<3"
-matplotlib = ">=3.11.1,<4"
-pandas = ">=3.0.5,<4"
-geopandas = ">=1.1.4,<2"
+numpy = ">=2.4.6,<3"
+matplotlib = ">=3.11.2,<4"
+pandas = ">=2.3.3,<3"
+geopandas = ">=1.2.0,<2"
 rioxarray = ">=0.23.0,<0.24"
-shapely = ">=2.1.2,<3"
+shapely = ">=2.2.0,<3"
 icepyx = ">=2.0.2,<3"
-xarray = "==2026.4.0"
-ipython = ">=9.16.1,<10"
+xarray = ">=2026.9.0,<2027"
+ipython = ">=9.17.1,<10"
 jupyter = ">=1.1.1,<2"
 netcdf4 = ">=1.7.4,<2"
-s3fs = ">=2026.6.0,<2027"
-fsspec = ">=2026.6.0,<2027"
+s3fs = ">=2026.9.0,<2027"
+fsspec = ">=2026.9.0,<2027"
 h5netcdf = ">=1.8.1,<2"
-zarr = ">=3.3.0,<4"
-dask = ">=2026.7.1,<2027"
-boto3 = ">=1.43.56,<2"
+zarr = ">=3.4.1,<4"
+dask = ">=2026.8.0,<2027"
+boto3 = ">=1.43.106,<2"
 xarray-regrid = ">=0.4.2,<0.5"
-xgboost = ">=3.4.1,<4"
+# xgboost = ">=3.4.1,<4"
+# py-xgboost-cpu = "*"
 xvec = ">=0.5.2,<0.6"
-dask-xgboost = ">=0.1.11,<0.2"
+# dask-xgboost = ">=0.1.11,<0.2"
 dask-ml = ">=2025.1.0,<2026"
+cudf = ">=26.6.1,<27"
+cuda-version = ">=13.3,<14"
+xgboost = ">=3.4.2,<4"
+pyarrow = ">=25.0.0,<26"
+shap = ">=0.52.0,<0.53"
 
 [pypi-dependencies]
-geoshapley = ">=0.2.0.0, <0.3"
+geoshapley = ">=0.2.1.0, <0.3"
