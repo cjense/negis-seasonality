@@ -5,3 +5,6 @@ pixi.lock
 !.pixi/config.toml
 *.zarr
 *.gpkg
+.vscode/
+.ipynb_checkpoints/
+__pycache__/
