@@ -1,6 +1,7 @@
 import geopandas as gpd
 import s3fs
 import xarray as xr
+import xarray_regrid  # noqa: F401  (registers the .regrid accessor)
 import rioxarray
 from rasterio.features import geometry_mask
 import os
@@ -60,8 +61,7 @@ def clip_meltwater(dataset, basin, glacier):
     return clipped
 
 def main():
-    meltwater = xr.open_dataset('/gpfs/scrubbed/jensencc/negis-seasonality/meltwater2000_2025_daily.nc')
-    # TODO: save meltwater data as Zarr file in Kopah
+    meltwater = xr.open_dataset('s3://gaia/cjense/data/mar/meltwater2000_2025_daily.zarr', storage_options=storage_options, consolidated=False)
 
     # Open velocity maps for regridding
     fs.get('s3://gaia/cjense/data/velocity/ZI_79N_velseries_612day.nc', '/tmp/ZI_79N_velseries_612day.nc')
@@ -85,7 +85,9 @@ def main():
 
     # Get basins for clipping data
     basins = gpd.read_file("/gpfs/scrubbed/jensencc/negis-seasonality/basins/Greenland_Basins_PS_v1.4.2.shp")
-    # TODO save basin data as Zarr file in Kopah
+    fs.get('s3://gaia/cjense/data/basins', '/tmp/', recursive=True)
+    basins = gpd.read_file('/tmp/basins/Greenland_Basins_PS_v1.4.2.shp')
+    
     zibasin = basins.loc[basins['NAME']=='ZACHARIAE_ISSTROM']
     basin79n = basins.loc[basins['NAME']=='NIOGHALVFJERDSFJORDEN']
     
