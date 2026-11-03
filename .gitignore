@@ -1,3 +1,4 @@
+*.nc
 seasonality-model
 .order_restart
 pixi.lock

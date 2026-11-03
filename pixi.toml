@@ -35,6 +35,7 @@ cuda-version = ">=13.3,<14"
 xgboost = ">=3.4.2,<4"
 pyarrow = ">=25.0.0,<26"
 shap = ">=0.52.0,<0.53"
+seaborn = ">=0.13.2,<0.14"
 
 [pypi-dependencies]
 geoshapley = ">=0.2.1.0, <0.3"
