@@ -17,7 +17,7 @@ def make_tabular_meltwater_data(resolution, glacier):
 
     meltwaterds = meltwater.chunk(chunks={"TIME": 100, "x": -1, "y": -1})
     meltwaterds = meltwaterds[["RU", "in_basin"]].drop_vars(['SECTOR', 'spatial_ref', 'crs', 'name', 'time', 'time1', 'time2'])
-    meltwaterds = meltwaterds.resample(TIME=resolution).mean().chunk({"TIME": 10})
+    meltwaterds = meltwaterds.resample(TIME=resolution, origin='2000-01-01').mean().chunk({"TIME": 10})
     meltwater = meltwaterds.to_dask_dataframe()
     meltwater = meltwater.reset_index(drop=True)
     meltwater = meltwater.rename(columns={"TIME":'time'})
@@ -31,8 +31,8 @@ def make_tabular_meltwater_data(resolution, glacier):
     return meltwater
 
 def main():
-    melt_79N = make_tabular_meltwater_data('MS', '79N')
-    melt_ZI = make_tabular_meltwater_data('MS', 'ZI')
+    melt_79N = make_tabular_meltwater_data('6D', '79N')
+    melt_ZI = make_tabular_meltwater_data('6D', 'ZI')
 
 if __name__ == "__main__":
     main()
