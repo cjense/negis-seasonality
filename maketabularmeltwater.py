@@ -25,7 +25,7 @@ def make_tabular_meltwater_data(resolution, glacier):
     # Save to parquet
     with dask.config.set(scheduler="threads", num_workers=int(os.environ.get("SLURM_CPUS_PER_TASK", 1))):
         meltwater = meltwater[meltwater.in_basin].drop(columns="in_basin")
-        meltwater.to_parquet(f"s3://gaia/cjense/data/mar/basin_meltwater_regridded_daily_{glacier}_2000_2025_{resolution}.parquet", storage_options=storage_options)
+        meltwater.to_parquet(f"s3://gaia/cjense/data/mar/basin_meltwater_regridded_{glacier}_2000_2025_{resolution}.parquet", storage_options=storage_options)
     print(f"Saved meltwater parquet for {glacier}")
     
     return meltwater
