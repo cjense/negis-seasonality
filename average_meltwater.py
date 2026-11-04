@@ -21,14 +21,17 @@ storage_options = {
     },
 }
 
-runoff_zi = xr.open_dataset('s3://gaia/cjense/data/mar/basin_meltwater_regridded_daily_ZI_2000_2025.zarr', storage_options=storage_options, consolidated=False)
+glaciers = ['ZI', '79N']
 
-ru_mean = runoff_zi.RU.mean(dim=['x', 'y']).compute()
+for glacier in glaciers:
+    runoff = xr.open_dataset(f's3://gaia/cjense/data/mar/basin_meltwater_regridded_daily_{glacier}_2000_2025.zarr', storage_options=storage_options, consolidated=False)
 
-# Save basin-mean runoff time series as zarr and parquet
-ru_mean_ds = ru_mean.drop_vars([c for c in ru_mean.coords if c != 'TIME']).to_dataset(name='RU')
-ru_mean_ds.to_zarr('s3://gaia/cjense/data/mar/basin_meltwater_mean_daily_ZI_2000_2025.zarr', consolidated=False, storage_options=storage_options, mode='w-')
+    ru_mean = runoff.RU.mean(dim=['x', 'y']).compute()
 
-ru_mean_df = ru_mean_ds.to_dataframe()
-ru_mean_df.to_parquet('s3://gaia/cjense/data/mar/basin_meltwater_mean_daily_ZI_2000_2025.parquet', storage_options=storage_options)
-ru_mean_df.head()
+    # Save basin-mean runoff time series as zarr and parquet
+    ru_mean_ds = ru_mean.drop_vars([c for c in ru_mean.coords if c != 'TIME']).to_dataset(name='RU')
+    ru_mean_ds.to_zarr(f's3://gaia/cjense/data/mar/basin_meltwater_mean_daily_{glacier}_2000_2025.zarr', consolidated=False, storage_options=storage_options, mode='w-')
+
+    ru_mean_df = ru_mean_ds.to_dataframe()
+    ru_mean_df.to_parquet(f's3://gaia/cjense/data/mar/basin_meltwater_mean_daily_{glacier}_2000_2025.parquet', storage_options=storage_options)
+    ru_mean_df.head()
